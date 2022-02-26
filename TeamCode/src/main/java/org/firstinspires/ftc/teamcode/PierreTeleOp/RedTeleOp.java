@@ -312,17 +312,17 @@ public class RedTeleOp extends LinearOpMode {
         if(gamepad2.a){
             rb.turnTable.setPower(redturnTablePower);
             telemetry.addData("A button","Pressed");
-            telemetry.update();
+            //telemetry.update();
         }
         else if(gamepad2.b){
             rb.turnTable.setPower(blueturnTablePower);
             telemetry.addData("A button","Pressed");
-            telemetry.update();
+            //telemetry.update();
         }
         else {
             rb.turnTable.setPower(0);
             telemetry.addData("A button", "Not Pressed");
-            telemetry.update();
+            //telemetry.update();
         }
     }
 
@@ -347,7 +347,7 @@ public class RedTeleOp extends LinearOpMode {
         }
         */
         //TODO: Check these to make sure the gamepad is correct
-
+        /*
         if ((gamepad2.left_trigger > 0.05f && rb.sliderSpool.getCurrentPosition() < -30))
             rb.sliderSpool.setPower(.75);
         else if (gamepad2.left_bumper && rb.sliderSpool.getCurrentPosition() > -1840)
@@ -361,7 +361,14 @@ public class RedTeleOp extends LinearOpMode {
         if (gamepad2.x){
             rb.sliderSpool.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rb.sliderSpool.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
+        }*/
+        if ((gamepad2.left_trigger > 0.05f))
+            rb.sliderSpool.setPower(.75);
+        else if (gamepad2.left_bumper)
+            rb.sliderSpool.setPower(-.75);
+        else
+            rb.sliderSpool.setPower(0);
+
     }
 
     private void intake(){ //throws InterruptedException{
@@ -369,7 +376,14 @@ public class RedTeleOp extends LinearOpMode {
         /*
         right now trigger is outake, intake is bumper
          */
-        if (!intakefunctionon) {
+        if (gamepad2.right_trigger > 0.1f)
+            rb.intakeMotor.setPower(1);
+        else if (gamepad2.right_bumper)
+            rb.intakeMotor.setPower(-1);
+        else
+            rb.intakeMotor.setPower(0);
+
+        /*if (!intakefunctionon) {
             if (gamepad2.right_trigger > 0.1f)
                 rb.intakeMotor.setPower(1);
             else if (gamepad2.right_bumper)
@@ -389,7 +403,7 @@ public class RedTeleOp extends LinearOpMode {
             else {
                 rb.intakeMotor.setPower(0);
             }
-        }
+        }*/
     }
 
 
